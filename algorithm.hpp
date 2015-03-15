@@ -4,7 +4,7 @@
 #include<cstdlib>
 #include<ctime>
 #include<vector>
-#define N 6
+#define N 10
     template<typename T>
 void swap(T* a,T* b)
 {
@@ -223,6 +223,7 @@ int& yesef(int* a,int num,int mod)
         }
         if(flag==mod)
         {
+            std::cout<<"delete : "<<a[index]<<std::endl;
             a[index]=0;
             flag=0;
             value--;
@@ -243,30 +244,24 @@ struct node
 };
 typedef struct node Node;
 typedef struct node *PNode;
-int main(int argc,char** argv)
+int& yeseflist(Node* head,int mod)
 {
-    Node head;
-    PNode tail=NULL;
-    for(int index=0;index!=N;index++)
+    PNode pnew=head;
+    int cnt=1;
+    while(pnew->next!=pnew)
     {
-        //PNode inode=new Node();
-        PNode inode=(PNode)calloc(1,sizeof(Node));
-        inode->data=index+1;
-        if(tail==NULL)
+        if(cnt!=mod)
         {
-            tail=inode;
-            head.next=tail;
+            cnt++;
+            pnew=pnew->next;
         }
-        else
+        if(cnt==mod)
         {
-            tail->next=inode;
+            std::cout<<"delete : "<<pnew->data<<std::endl;
+            pnew->data=pnew->next->data;
+            pnew->next=pnew->next->next;
+            cnt=1;
         }
     }
-    PNode pnew=head.next;
-    while(pnew)
-    {
-        std::cout<<pnew->data<<" ";
-        pnew=pnew->next;
-    }
-    std::cout<<std::endl;
+    return pnew->data;
 }
