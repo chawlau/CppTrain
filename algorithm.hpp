@@ -237,6 +237,7 @@ int& yesef(int* a,int num,int mod)
         }
     }
 }
+/*循环单链表解决约瑟夫环问题*/
 struct node
 {
     int data;
