@@ -16,8 +16,6 @@ bool list_is_loop(PNode head)
 {
     PNode p=head;
     PNode q=head;
-    PNode meet=NULL;
-    int flag=0;
     while(1)
     {
         p=p->next->next;
@@ -26,21 +24,9 @@ bool list_is_loop(PNode head)
         {
             return false;
         }
-        std::cout<<"p data : --> "<<p->pos<<std::endl;
         if(p==q)
         {
-            if(flag==1)
-            {
-                meet=p;
-                std::cout<<"list is loop"<<std::endl;
-                std::cout<<"meet address : --> "<<meet<<" meet pos : --> "<<meet->pos<<std::endl;
-                return true;
-            }
-            else
-            {
-                flag=1;
-                q=head;
-            }
+            return true;
         }
     }
 }
@@ -155,9 +141,9 @@ void build_meet_list(Node** head1,Node** head2,Node** tail2)/*建立两个相交
     }
     Node* inew=new Node();
     /*
-    inew->pos=rand()%100+1;
-    inew->next=*head1;
-    *head1=inew;*/
+       inew->pos=rand()%100+1;
+       inew->next=*head1;
+     *head1=inew;*/
     list_out(*head1);
     list_out(*head2);
 }
@@ -184,12 +170,12 @@ Node* find_loop_port(PNode head)/*要设置一个头节点*/
     Node* fast=head;
     while(fast&&fast->next)
     {
-       slow=slow->next;
-       fast=fast->next->next;
-       if(slow==fast)
-       {
+        slow=slow->next;
+        fast=fast->next->next;
+        if(slow==fast)
+        {
             break;
-       }
+        }
     }
     if(fast==NULL||slow==NULL)
     {
