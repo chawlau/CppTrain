@@ -1,9 +1,11 @@
 #include<iostream>
 #include<cstring>
 #include<stdexcept>
+class String;
+std::ostream& operator<<(std::ostream& out,String& obj);
 class Ref_cnt
 {
-    friend class Str;
+    friend class String;
     int m_cnt;
     int m_size;
     char* m_ptr;
@@ -39,22 +41,23 @@ class Ref_cnt
         delete [] m_ptr;
     }
 };
-class Str
+class String
 {
     public:
-        Str():m_use(NULL){}
-        Str(const char* data):m_use(new Ref_cnt(strlen(data)+1))
+        friend std::ostream& ::operator<<(std::ostream& out,const String& obj);
+        String():m_use(NULL){}
+        String(const char* data):m_use(new Ref_cnt(strlen(data)+1))
     {
         strcpy(m_use->get_str(),data);
         std::cout<<"init cnt is :"<<m_use->get_cnt()<<std::endl;
     }
-        Str(const Str& obj)
+        String(const String& obj)
         {
             m_use=obj.m_use;
             m_use->increment();
             std::cout<<"current ref_cnt is "<<m_use->get_cnt()<<std::endl;
         }
-        Str& operator=(const Str& obj)
+        String& operator=(const String& obj)
         {
             if(this==&obj)
             {
@@ -75,23 +78,11 @@ class Str
         {
             return m_use->get_str();
         }
-        ~Str()
-        {
-            if(m_use==NULL)
-            {
-                return;
-            }
-            m_use->decrement();
-            if(m_use->get_cnt()==0)
-            {
-                delete m_use;
-            }
-        }
-        bool operator<(Str& right)
+        bool operator<(String& right)
         {
             return strcmp(this->get_str(),right.get_str())<0;
         }
-        bool operator>(Str& right)
+        bool operator>(String& right)
         {
             return !(*this<right);
         }
@@ -105,34 +96,19 @@ class Str
             {
                 return (m_use->get_str())[pos];
             }
+            /*将这块空间的指针赋值给temp由temp来判断引用计数*/
             Ref_cnt* temp=m_use;
-            m_use->decrement();
-            m_use=new Ref_cnt(temp->m_size);
-            strcpy(m_use->m_ptr,temp->m_ptr);
+            temp->decrement();
             if(temp->m_cnt==0)
             {
                 delete temp;
             }
+            /*单独开辟一块新的空间来存放原来的内容*/
+            m_use=new Ref_cnt(temp->m_size);
+            strcpy(m_use->m_ptr,temp->m_ptr);
             return m_use->m_ptr[pos];
         }
-        Str operator+(Str& right)
-        {
-            if(m_use==NULL)
-            {
-                return right;
-            }
-            char* m_temp=new char(m_use->m_size+(right.m_use)->m_size-1);
-            strcat(m_temp,m_use->m_ptr);
-            strcat(m_temp,(right.m_use)->m_ptr);
-            Str str_temp(m_temp);
-            return str_temp;
-        }
-        Str& operator+=(Str& right)
-        {
-            *this= (*this)+right;
-            return *this;
-        }
-        void set_str(const char* data)
+        void set_str(const char* data)/*可以和operaor[]参照对比比较*/
         {
             if(m_use==NULL)
             {
@@ -158,8 +134,44 @@ class Str
                 m_use=new Ref_cnt(strlen(data)+1);
                 strcpy(m_use->m_ptr,data);
             }
-
+        }
+        String operator+(String& right)/*直接创建一个String对象，存放两个对象相加之和*/
+        {
+            if(m_use==NULL)
+            {
+                return right;
+            }
+            char* m_temp=new char(m_use->m_size+(right.m_use)->m_size-1);
+            strcpy(m_temp,m_use->m_ptr);
+            strcat(m_temp,(right.m_use)->m_ptr);
+            String str_temp(m_temp);
+            return str_temp;/*返回时执行了operator=(const String& obj)方法*/
+        }
+        String& operator+=(String& right)
+        {
+            *this= (*this)+right;/*从这里可以很容易看出operator+返回执行了operator=*/
+            return *this;
+        }
+        ~String()
+        {
+            if(m_use==NULL)
+            {
+                return;
+            }
+            /*析构函数记得释放空间*/
+            m_use->decrement();
+            if(m_use->get_cnt()==0)
+            {
+                delete m_use;
+            }
         }
     private:
         Ref_cnt* m_use;
 };
+
+std::ostream& operator<<(std::ostream& out,String& obj)
+{
+    out<<obj.get_str();
+    return out;
+}
+
