@@ -44,7 +44,7 @@ class Ref_cnt
 class String
 {
     public:
-        friend std::ostream& ::operator<<(std::ostream& out,const String& obj);
+        //friend std::ostream& ::operator<<(std::ostream& out,const String& obj);
         String():m_use(NULL){}
         String(const char* data):m_use(new Ref_cnt(strlen(data)+1))
     {
@@ -98,14 +98,14 @@ class String
             }
             /*将这块空间的指针赋值给temp由temp来判断引用计数*/
             Ref_cnt* temp=m_use;
+            /*单独开辟一块新的空间来存放原来的内容*/
+            m_use=new Ref_cnt(temp->m_size);
+            strcpy(m_use->m_ptr,temp->m_ptr);
             temp->decrement();
             if(temp->m_cnt==0)
             {
                 delete temp;
             }
-            /*单独开辟一块新的空间来存放原来的内容*/
-            m_use=new Ref_cnt(temp->m_size);
-            strcpy(m_use->m_ptr,temp->m_ptr);
             return m_use->m_ptr[pos];
         }
         void set_str(const char* data)/*可以和operaor[]参照对比比较*/
