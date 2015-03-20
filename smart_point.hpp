@@ -1,8 +1,8 @@
 #include<iostream>
 #include<cstring>
 #include<stdexcept>
-class String;
-std::ostream& operator<<(std::ostream& out,String& obj);
+//class String;
+//std::ostream& operator<<(std::ostream& out,String& obj);
 class Ref_cnt
 {
     friend class String;
@@ -49,7 +49,7 @@ class String
         String(const char* data):m_use(new Ref_cnt(strlen(data)+1))
     {
         strcpy(m_use->get_str(),data);
-        std::cout<<"init cnt is :"<<m_use->get_cnt()<<std::endl;
+        std::cout<<__func__<<":"<<__LINE__<<std::endl;
     }
         String(const String& obj)
         {
@@ -73,10 +73,15 @@ class String
             }
             m_use=obj.m_use;
             m_use->increment();
+            std::cout<<__func__<<":"<<__LINE__<<std::endl;
         }
-         char* get_str()
+        char* get_str()
         {
             return m_use->get_str();
+        }
+        int& get_cnt()
+        {
+            return m_use->get_cnt();
         }
         bool operator<(String& right)
         {
@@ -144,8 +149,10 @@ class String
             char* m_temp=new char(m_use->m_size+(right.m_use)->m_size-1);
             strcpy(m_temp,m_use->m_ptr);
             strcat(m_temp,(right.m_use)->m_ptr);
-            String str_temp(m_temp);
-            return str_temp;/*返回时执行了operator=(const String& obj)方法*/
+            //String str_temp(m_temp);
+            return m_temp;/*返回时同样执行了operator=(const String& obj)方法*/
+            //return str_temp;/*返回时执行了operator=(const String& obj)方法*/
+            std::cout<<__func__<<":"<<__LINE__<<std::endl;
         }
         String& operator+=(String& right)
         {
@@ -164,11 +171,11 @@ class String
             {
                 delete m_use;
             }
+            std::cout<<__func__<<":"<<__LINE__<<std::endl;
         }
     private:
         Ref_cnt* m_use;
 };
-
 std::ostream& operator<<(std::ostream& out,String& obj)
 {
     out<<obj.get_str();
