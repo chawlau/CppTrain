@@ -83,11 +83,11 @@ template<typename T> struct Conbine_queue
     {
         return size()==0;
     }
-    void push(const T& data)
+    void insert(const T& data)
     {
         s1.push(data);
     }
-    void pop(T& data)
+    void Delete()
     {
         if(empty())
         {
@@ -95,20 +95,20 @@ template<typename T> struct Conbine_queue
         }
         if(!s2.empty())
         {
-            s2.pop(data);
+            s2.pop();
         }
         else
         {
             while(!s1.empty())
             {
-                s1.pop(data);
-                std::cout<<"s1 pop data"<<std::endl;
+                T data=s1.top();
+                s1.pop();
                 s2.push(data);
             }
-            s2.pop(data);
+            s2.pop();
         }
     }
-    T& top()
+    T& front()
     {
         if(!empty())
         {
@@ -121,7 +121,8 @@ template<typename T> struct Conbine_queue
                 T data;
                 while(!s1.empty())
                 {
-                    s1.pop(data);
+                    data=s1.top();
+                    s1.pop();
                     s2.push(data);
                 }
                 return s2.top();
@@ -133,7 +134,8 @@ template<typename T> struct Conbine_queue
         T data;
         while(!s1.empty())
         {
-            s1.pop(data);
+            T data=s1.top();
+            s1.pop();
             s2.push(data);
         }
         s2.show();

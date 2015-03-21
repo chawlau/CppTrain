@@ -26,12 +26,15 @@ template<typename T> struct Stack
         m_head=inode;
         m_size++;
     }
-    void pop(T& data)
+    int& size()
+    {
+        return m_size;
+    }
+    void pop()
     {
         if(m_size==0)
             return;
         Node<T>* temp=m_head;
-        data=temp->m_data;
         m_head=temp->m_next;
         delete temp;
         m_size--;
@@ -40,17 +43,14 @@ template<typename T> struct Stack
     {
         if(m_size!=0)
         {
-        return m_head->m_data;
+           return m_head->m_data;
         }
     }
     void destroy()
     {
         while(m_head)
         {
-            Node<T>* temp=m_head;
-            m_head=temp->m_next;
-            delete temp;
-            m_size--;
+            pop();
         }
     }
     bool empty()
