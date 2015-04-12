@@ -12,6 +12,7 @@
 #include <stdexcept>
 #include <iostream>
 #include <sstream>
+#define FD_MAX 1023
 namespace SELECT
 {
     struct Client_info
@@ -25,7 +26,7 @@ namespace SELECT
     };
     void sighandle(int signum)
     {
-         std::cout<<"Capture signal is "<<signum<<std::endl;
+        std::cout<<"Capture signal is "<<signum<<std::endl;
     }
     class Select
     {
@@ -37,6 +38,7 @@ namespace SELECT
             {
                 throw std::runtime_error("open pipe failed");
             }
+            fd_max=fd_server;//可以避免扫描整个集合
             signal(SIGPIPE,sighandle);
         }
             void init()
@@ -64,6 +66,8 @@ namespace SELECT
                 inode->m_name=value["name"].asString();//客户端名字
                 inode->m_read=open(value["pipe_w"].asString().c_str(),O_RDONLY);//打开读写管道
                 inode->m_write=open(value["pipe_r"].asString().c_str(),O_WRONLY);
+                if(inode->m_read>fd_max)
+                    fd_max=inode->m_read;
                 inode->m_next=m_head;
                 m_head=inode;
                 FD_SET(inode->m_read,&read_set);//将读描述符放入监听集合
@@ -71,7 +75,7 @@ namespace SELECT
                 ss<<inode->m_name<<" is on line !"<<std::endl;
                 std::string onmsg=ss.str();
                 std::cout<<onmsg;
-                dispatch(onmsg,inode);/*群发客户端上线消息*/
+                dispatch(onmsg,inode->m_pid);/*群发客户端上线消息*/
             }
             void offline(const std::string& msg)
             {
@@ -93,7 +97,7 @@ namespace SELECT
                 ss<<search->m_name<<" off line normal"<<std::endl;
                 std::string offmsg=ss.str();
                 std::cout<<offmsg;
-                dispatch(offmsg,search);/*群发该客户端下线的消息*/
+                dispatch(offmsg,search->m_pid);/*群发该客户端下线的消息*/
                 close(search->m_read);
                 close(search->m_write);//关闭下线客户端的读写描述符
                 if(pre==NULL)/*将下线的客户端从链表中移除同时释放空间*/
@@ -107,15 +111,14 @@ namespace SELECT
                     pre->m_next=search->m_next;
                     delete search;
                 }
-                temp_set=read_set;
             }
-            void dropoff(const int& pid)
+            void dropoff(const int& read)
             {
                 Client_info* search=m_head;
                 Client_info* pre=NULL;
                 while(search)
                 {
-                    if(search->m_pid==pid)//找到掉线的客户端
+                    if(search->m_read==read)//找到掉线的客户端
                     {
                         break;
                     }
@@ -127,7 +130,7 @@ namespace SELECT
                 ss<<search->m_name<<" drop off line !"<<std::endl;
                 std::string offmsg=ss.str();
                 std::cout<<offmsg;
-                dispatch(offmsg,search);/*群发该客户端掉线的消息*/
+                dispatch(offmsg,search->m_pid);/*群发该客户端掉线的消息*/
                 close(search->m_read);
                 close(search->m_write);//关闭掉线客户端的读写描述符
                 if(pre==NULL)/*将线的客户端从链表中移除同时释放空间*/
@@ -141,46 +144,46 @@ namespace SELECT
                     pre->m_next=search->m_next;
                     delete search;
                 }
-                temp_set=read_set;
             }
-            void broadcast()//采用扫描链表的方式来观察文件描述符活动
+            void handle_task(const int& index)
             {
-                Client_info* cur=m_head;
                 char recv_buf[1024]="";
-                while(cur)
+                int recv_len=read(index,recv_buf,1024);
+                if(recv_len==0)
                 {
-                    if(FD_ISSET(cur->m_read,&temp_set))
+                    dropoff(index);       //处理掉线
+                }
+                else if(recv_len>0)
+                {
+                    std::string msg(recv_buf);
+                    if(msg.find("off")!=std::string::npos)//客户端正常下线
                     {
-                        bzero(recv_buf,1024);
-                        if(read(cur->m_read,recv_buf,1024)!=0)
-                        {
-                            std::string offmsg(recv_buf);
-                            if(offmsg.find("off")!=std::string::npos)//客户端正常下线
-                            {
-                                offline(offmsg);        
-                            }
-                            else                                    //客户端发送消息
-                            {
-                                std::stringstream ss;
-                                ss<<recv_buf<<"from <<"<<cur->m_name<<std::endl;
-                                std::string msg=ss.str();
-                                dispatch(msg,cur);
-                            }
-                        }
-                        else  //客户端掉线
-                        {
-                            dropoff(cur->m_pid);
-                        }
+                        offline(msg);        
                     }
-                    cur=cur->m_next;
+                    else                                    
+                    {
+                        sendmsg(msg);      //客户端正常发消息
+                    }
                 }
             }
-            void dispatch(const std::string& msg,Client_info* current)
+            void sendmsg(const std::string& msg)
+            {
+                Json::Value msginfo;
+                reader.parse(msg,msginfo,false);    
+                int msg_pid=msginfo["pid"].asInt();
+                std::string clientname=msginfo["name"].asString();
+                std::string clientmsg=msginfo["msg"].asString();
+                std::stringstream ss;
+                ss<<clientmsg<<"from client :"<<clientname<<std::endl;
+                std::string msgmsg=ss.str();
+                dispatch(msgmsg,msg_pid);
+            }
+            void dispatch(const std::string& msg,const int& pid)
             {
                 Client_info* broadcast=m_head;
                 while(broadcast)
                 {
-                    if(broadcast!=current)
+                    if(broadcast->m_pid!=pid)//不能加入FD_ISSET来判断,否则未活动的描述符就收不到消息了
                     {
                         write(broadcast->m_write,msg.c_str(),msg.size());
                     }
@@ -193,20 +196,44 @@ namespace SELECT
                 std::cout<<"server waiting for connecting"<<std::endl;
                 while(1)
                 {
+                    timeout.tv_sec=30;//设置系统延迟等待时间30s
+                    timeout.tv_usec=0; 
                     temp_set=read_set;
-                    select(1024,&temp_set,NULL,NULL,NULL);
-                    if(FD_ISSET(fd_server,&temp_set))
+                    result=select(fd_max+1,&temp_set,NULL,NULL,&timeout);
+                    if(result==-1)
                     {
-                        handle_on(); 
+                        std::cout<<"select error!"<<std::endl;
+                        break;
                     }
-                    broadcast();
+                    if(result==0)
+                    {
+                        std::cout<<"server waiting time out!"<<std::endl;
+                        continue;
+                    }
+                    for(int index=0;index!=fd_max+1;index++)
+                    {
+                        if(FD_ISSET(index,&temp_set))
+                        {
+                            if(index==fd_server)//处理上线
+                            {
+                                handle_on(); 
+                            }
+                            else
+                            {
+                                handle_task(index);//处理客户端上线以外其他的业务
+                            }
+                        }
+                    }
                 }
             }
         private:
             Client_info* m_head;
             fd_set read_set;
             fd_set temp_set;
+            struct timeval timeout;
+            int result;
             int fd_server;
+            int fd_max;
             Json::FastWriter writer;
             Json::Reader reader;
     };
