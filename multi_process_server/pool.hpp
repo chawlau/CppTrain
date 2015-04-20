@@ -1,4 +1,3 @@
-#include "epoll.hpp"
 #include<sys/stat.h>
 #include<sys/types.h>
 #include<fcntl.h>
@@ -7,7 +6,10 @@
 #include<sys/mman.h>
 #include<vector>
 #include<queue>
+#include <iostream>
+#include "socket.hpp"
 #define CHILDNUM 2            
+using namespace std;
 namespace PROCESSPOOL
 {
     struct Pchild
@@ -22,19 +24,19 @@ namespace PROCESSPOOL
         public:
             Process_pool(const std::string& port):server(new SOCKET::Socket(port))
         {
-            if(-1==socketpair(AF_LOCAL,SOCK_STREAM,0,fds))
+            if(-1==socketpair(AF_LOCAL,SOCK_STREAM,0,fds))//创建可以实现父子进程发送描述符的fds
             {
                 perror("socket pair");
             }
         }
-            void server_init()
+            void server_init()//初始化socket连接
             {
                 server->socket_init();
                 server->socket_bind();
                 server->socket_listen();
                 std::cout<<"server socket init"<<std::endl;
             }
-            void fdset_init()
+            void fdset_init()//select监听初始化
             {
                 FD_ZERO(&read_set);
                 FD_ZERO(&ready_set);
@@ -45,7 +47,7 @@ namespace PROCESSPOOL
                 }
                 std::cout<<"child local fd and server_sock has been add in read_set"<<std::endl;
             }
-            void child_create()
+            void child_create()//创建CHILDNUM个子进程
             {
                 int index=0;
                 while(index<CHILDNUM)
@@ -64,55 +66,66 @@ namespace PROCESSPOOL
                         exit(1);
                     }
                     close(fd_send[0]);
-                    Pchild* child=new Pchild(fd_send[1],pid,0);
-                    child_info.push_back(*child);
+                    Pchild* child=new Pchild(fd_send[1],pid,0);//创建的子进程信息对象
+                    child_info.push_back(*child);//放入child_info这个对象数组中
                     index++;
                 }
                 std::cout<<"child process has been create"<<std::endl;
             }
-            void child_detect()
+            void child_detect()//遍历child_info这个进程对象数组查看空闲子进程
             {
+                char buf[16];
                 for(int index=0;index!=CHILDNUM;index++)
                 {
-                    if(FD_ISSET(child_info[index].ch_fd,&ready_set))
+                    if(FD_ISSET(child_info[index].ch_fd,&ready_set))//有空闲进程
                     {
-                        if(!wait_client.empty())
+                        read(child_info[index].ch_fd, buf,16); //consume the descriptor
+                        std::cout<<"child #"<<index<<"waiting for fd"<<endl;
+                        if(!wait_client.empty())//如果客户端等待队列不为空，说明有客户端请求等待处理
                         {
+                            std::cout<<"wait client #"<<wait_client.front()<<"in queue"<<endl;
                             server->socket_send(wait_client.front(),"now you can do!");
                             send_fd(child_info[index].ch_fd,wait_client.front());
                             wait_client.pop();
-                            child_info[index].ch_busy=1;
+                            child_info[index].ch_busy=1;//让子进程出力客户端请求，同时将busy置为1
+                        } 
+                        else
+                        {
+                            std::cout<<"no waiting clients"<<endl;
+                            child_info[index].ch_busy=0;
                         }
                     }
                 }
             }
-            void child_handle(const int& local_fd)
+            void child_handle(const int& local_fd)//子进程处理客户端任务
             {
                 int sockfd;
                 int flag=1;
                 while(1)
                 {
                     recv_fd(local_fd,sockfd);
+                    cout<< "child got fd"<<endl;
                     char msg[1024];
                     while(bzero(msg,1024),server->socket_recv(sockfd,msg)>0)
                     {
                         std::string offmsg(msg);
-                        if(offmsg.find("off")!=std::string::npos)
+                        if(offmsg.find("off")!=std::string::npos)//子进程受到客户端约定的下线请求
                         {
                             break;
                         }
-                        //std::cout<<msg<<std::endl;
-                        int fd_read=open("ming.txt",O_RDONLY);
+                        std::cout<<"pid:"<<getpid()<<' '<<msg<<std::endl;
+                        int fd_read=open("ming.txt",O_RDONLY);//子进程的具体业务，此段就是将一个文本内容返回给客户端
                         char ming[1024];
+                        bzero(ming,1024);
                         read(fd_read,ming,1024);
                         server->socket_send(sockfd,ming);
                     }
                     write(local_fd,&flag,sizeof(int));        
-                    std::cout<<local_fd<<" has been finish task,notice it's status is free"<<std::endl;
+                    cout<<"offine"<<endl;
                     close(sockfd);
                 }
             }
-            void select_listen()
+            void select_listen()//select监听
             {
                 ready_set=read_set;
                 timeout.tv_sec=100;
@@ -126,21 +139,21 @@ namespace PROCESSPOOL
                 {
                     if(FD_ISSET(index,&ready_set))
                     {
-                        if(index==server->server_sock)
+                        if(index==server->server_sock)//客户端上线请求
                         {
                             int fd_client=server->socket_accept();
                             int index_t;
-                            for(index_t=0;index_t!=CHILDNUM;index_t++)
+                            for(index_t=0;index_t!=CHILDNUM;index_t++)//遍历子进程信息表
                             {
-                                if(child_info[index_t].ch_busy==0)
+                                if(child_info[index_t].ch_busy==0)//发现空闲子进程
                                 {
-                                    std::cout<<child_info[index_t].ch_pid<<" is free,handle task"<<std::endl;
-                                    send_fd(child_info[index_t].ch_fd,fd_client);
+                                    std::cout<<child_info[index_t].ch_pid<<" is free,handle task  "<<index_t<<std::endl;
+                                    send_fd(child_info[index_t].ch_fd,fd_client);//客户端socket发给子进程
                                     child_info[index_t].ch_busy=1;
                                     break;
                                 }
                             }
-                            if(index_t==CHILDNUM)
+                            if(index_t==CHILDNUM)//说明没有空闲子进程，通知客户端让其等待
                             {
                                 std::string busy="no free child process, waiting....";
                                 std::cout<<"no free child process, waiting...."<<std::endl;
@@ -148,13 +161,11 @@ namespace PROCESSPOOL
                                 wait_client.push(fd_client);
                                 break;
                             }
-                            //send_fd(child_info[index_t].ch_fd,fd_client);
-                            //child_info[index_t].ch_busy=1;
                         }
                     }
                 }
             }
-            void child_pool()
+            void child_pool()//监听系统执行的主函数
             {
                 child_create();
                 server_init();
@@ -165,7 +176,7 @@ namespace PROCESSPOOL
                     child_detect();
                 }
             }
-            void handle()
+            void handle()//暂时用不着
             {
                 server_init();
                 if(fork()==0)
@@ -195,7 +206,7 @@ namespace PROCESSPOOL
                 send_fd(fds[1],fd_client);
                 wait(NULL);
             }
-            void send_fd(const int& sockfd,const int& fd)
+            void send_fd(const int& sockfd,const int& fd)//发送文件描述符
             {
                 struct msghdr my_msg;
                 bzero(&my_msg,sizeof(my_msg));
@@ -219,7 +230,7 @@ namespace PROCESSPOOL
                 int ret=sendmsg(sockfd,&my_msg,0);
                 //std::cout<<"sendmsg ret :"<<ret<<std::endl;
             }
-            void recv_fd(const int& sockfd,int& fd)
+            void recv_fd(const int& sockfd,int& fd)//接收文件描述符
             {
                 struct msghdr my_msg;
                 bzero(&my_msg,sizeof(my_msg));
@@ -241,11 +252,11 @@ namespace PROCESSPOOL
             }
         private:
             int fds[2];
-            SOCKET::Socket* server;
+            SOCKET::Socket* server;//socket 对象指针
             fd_set read_set;
             fd_set ready_set;
             struct timeval timeout;
-            std::vector<Pchild> child_info;
-            std::queue<int> wait_client;
+            std::vector<Pchild> child_info;//子进程对象数组
+            std::queue<int> wait_client;//等待请求被处理的客户端
     };
 }
