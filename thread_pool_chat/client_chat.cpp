@@ -75,10 +75,8 @@ int main(int argc,char** argv)
         if(off_flag)
         {
             client->socket_send(client->server_sock,"");
-            waitpid(-1,NULL,WNOHANG);
-            close(client->server_sock);
             _exit(0);
         }
     }
-    wait(NULL);
+    waitpid(-1,NULL,WNOHANG);
 }
