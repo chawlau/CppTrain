@@ -13,6 +13,8 @@ void handle(int signum)
     std::string dropjson=writer.write(drop);
     ex_client->socket_send(ex_client->server_sock,dropjson.c_str());
     waitpid(-1,NULL,WNOHANG);
+    kill(ch_pid,9);
+    close(ex_client->server_sock);
     _exit(1);
 }
 void signal_register()
@@ -23,6 +25,7 @@ void signal_register()
     act.sa_flags=0;
     sigaction(SIGCHLD,&act,NULL);
     sigaction(SIGINT,&act,NULL);
+    sigaction(SIGQUIT,&act,NULL);
     sigaction(SIGALRM,&act,NULL);
 }
 int main(int argc,char** argv)
@@ -44,6 +47,7 @@ int main(int argc,char** argv)
     char recv_buf[1024];
     if(fork()==0)
     {
+        ch_pid=getpid();
         while(bzero(recv_buf,1024),client->socket_recv(client->server_sock,recv_buf)>0)
         {
             Json::Value value;
@@ -54,7 +58,6 @@ int main(int argc,char** argv)
         }
         _exit(1);
     }
-    ch_pid=getpid();
     std::string msg;
     int off_flag=0;
     while(std::cout<<"客户端输入"<<std::endl,std::cin>>msg)
@@ -71,7 +74,9 @@ int main(int argc,char** argv)
         client->socket_send(client->server_sock,jsonfile.c_str());
         if(off_flag)
         {
+            client->socket_send(client->server_sock,"");
             waitpid(-1,NULL,WNOHANG);
+            close(client->server_sock);
             _exit(0);
         }
     }
