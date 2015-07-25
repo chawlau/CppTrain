@@ -28,5 +28,5 @@ int main(int argc,char** argv)
         client->socket_send(client->server_sock,jsonfile.c_str());
     }
     close(client->server_sock);
-    wait(NULL);
+    waitpid(-1,NULL,WNOHANG);
 }

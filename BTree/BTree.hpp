@@ -106,16 +106,15 @@ template<typename T> struct BTree
         }
         std::stack<BNode<T>*> s;
         BNode<T>* start=m_root;
-        std::cout<<__func__<<":"<<__LINE__<<std::endl;
         while(start||!s.empty())
         {
             while(start)
             {
                 std::cout<<"current data: "<<start->m_data;
-                std::cout<<"pre: "<<get_pre_pre(start)<<"post: "<<get_pre_suc(start);
+                std::cout<<"  pre: "<<get_pre_pre(start)<<"  post: "<<get_pre_suc(start);
                 if(start->parent)
                 {
-                    std::cout<<"-->father node data: "<<start->parent->m_data;
+                    std::cout<<"  father node data: "<<start->parent->m_data;
                 }
                 std::cout<<std::endl;
                 s.push(start);
@@ -225,7 +224,6 @@ template<typename T> struct BTree
         }
         std::stack<BNode<T>*> s;
         BNode<T>* start=m_root;
-        std::cout<<__func__<<":"<<__LINE__<<std::endl;
         while(start||!s.empty())
         {
             while(start)
@@ -238,25 +236,10 @@ template<typename T> struct BTree
                 start=s.top();
                 s.pop();
                 std::cout<<"current data: "<<start->m_data;
+                std::cout<<"  pre: "<<get_pre(start)<<"  post: "<<get_suc(start);
                 if(start->parent)
                 {
-                    std::cout<<"-->father node data: "<<start->parent->m_data;
-                }
-                if(T suc=get_suc(start))
-                {
-                    std::cout<<"-->succed node data: "<<suc;
-                }
-                else
-                {
-                    std::cout<<"--> no succed node data: ";
-                }
-                if(T pre=get_pre(start))
-                {
-                    std::cout<<"-->preval node data: "<<pre;
-                }
-                else
-                {
-                    std::cout<<"--> no preval node data: ";
+                    std::cout<<"  father node data: "<<start->parent->m_data;
                 }
                 std::cout<<std::endl;
                 start=start->rchild;
@@ -347,7 +330,6 @@ template<typename T> struct BTree
         std::stack<BNode<T>*> s;
         BNode<T>* start=m_root;
         BNode<T>* visit=NULL;
-        std::cout<<__func__<<":"<<__LINE__<<std::endl;
         while(start||!s.empty())
         {
             while(start)
@@ -370,10 +352,10 @@ template<typename T> struct BTree
                     s.pop();
                     visit=start;
                     std::cout<<"current data: "<<start->m_data;
-                    std::cout<<"pre: "<<get_post_pre(start)<<"post: "<<get_post_suc(start);
+                    std::cout<<"  pre: "<<get_post_pre(start)<<"  post: "<<get_post_suc(start);
                     if(start->parent)
                     {
-                        std::cout<<"-->father node data: "<<start->parent->m_data;
+                        std::cout<<"  father node data: "<<start->parent->m_data;
                     }
                     std::cout<<std::endl;
                     start=NULL;
