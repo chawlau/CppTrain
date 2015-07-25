@@ -3,6 +3,7 @@
 #include <json/json.h>
 int main(int argc,char** argv)
 {
+    alarm(10);
     Json::FastWriter writer;
     SOCKET::Socket* client=new SOCKET::Socket(argv[2]);
     std::string name(argv[1]);
