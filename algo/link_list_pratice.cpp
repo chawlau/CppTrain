@@ -6,7 +6,7 @@
 struct Node {
   int data;
   Node* next;
-  Node(int data_) : data(data_) , next(NULL) {}
+  Node(int data_ = 1) : data(data_) , next(NULL) {}
 };
 
 void InsertNode(Node** head, int data) {
@@ -68,17 +68,109 @@ void MakeCircleLinkList(Node** head) {
   cur->next = *head;
 }
 
-int main(int argc, char** argv) {
+void createSortList(Node** a, Node** b) {
+  InsertNode(a, 2);
+  InsertNode(a, 1);
+  InsertNode(a, 0);
+  InsertNode(b, 6);
+  InsertNode(b, 5);
+  InsertNode(b, 3);
+}
+
+void moveNode(Node** desc, Node** src) {
+  if (src == NULL) return;
+  Node* new_node = *src;
+  *src = new_node->next;
+  new_node->next = *desc;
+  *desc = new_node;
+}
+
+void deleteLastKth(Node** head, int k) {
+  if (*head == NULL || k == 0) return;
+
+  Node* fast = *head;
+  int i = 0;
+  while(i < k - 1 && fast != NULL) {
+    fast = fast->next;
+    i++;
+  }
+
+  if (fast == NULL) return;
+
+  Node* slow = *head;
+  Node* pre = NULL;
+  while (slow != NULL && fast->next != NULL) {
+    pre = slow;
+    slow = slow->next;
+    fast = fast->next;
+  }
+
+  if (!pre) {
+    (*head) = (*head)->next;
+  } else {
+    pre->next = slow->next;
+  }
+  free(slow);
+}
+
+void testDeleteLastKth() {
   Node* head = NULL;
-  InsertNode(&head, 1);
-  InsertNode(&head, 2);
   InsertNode(&head, 3);
+  InsertNode(&head, 2);
+  InsertNode(&head, 1);
   PrintLinkList(head);
-  reverse(&head);
+  deleteLastKth(&head, 2);
   PrintLinkList(head);
-  printf("circle %d\n", circle(head));
-  Node* circle_list = NULL;
-  MakeCircleLinkList(&circle_list);
-  printf("circle %d\n", circle(circle_list));
-  PrintLinkList(circle_list);
+}
+
+Node* mergeSortedLinkList(Node* a, Node* b) {
+  Node dummy(1);
+  Node* tail = &dummy;
+
+  while (true) {
+    if (a == NULL) {
+      tail->next = b;
+      break;
+    } else if (b == NULL) {
+      tail->next = a;
+      break;
+    }
+
+    if (a->data <= b->data) {
+      moveNode(&(tail->next), &a);
+    } else {
+      moveNode(&(tail->next), &b);
+    }
+    tail = tail->next;
+  }
+  return dummy.next;
+}
+
+void testMergeSortedList() {
+  Node* a = NULL;
+  Node* b = NULL;
+  createSortList(&a, &b);
+  PrintLinkList(a);
+  PrintLinkList(b);
+  Node* ret = mergeSortedLinkList(a, b);
+  PrintLinkList(ret);
+}
+
+int main(int argc, char** argv) {
+  /*
+     Node* head = NULL;
+     InsertNode(&head, 1);
+     InsertNode(&head, 2);
+     InsertNode(&head, 3);
+     PrintLinkList(head);
+     reverse(&head);
+     PrintLinkList(head);
+     printf("circle %d\n", circle(head));
+     Node* circle_list = NULL;
+     MakeCircleLinkList(&circle_list);
+     printf("circle %d\n", circle(circle_list));
+     PrintLinkList(circle_list);
+     */
+  //testMergeSortedList();
+  testDeleteLastKth();
 }
