@@ -156,21 +156,49 @@ void testMergeSortedList() {
   PrintLinkList(ret);
 }
 
+Node* findMiddleNode(Node* head) {
+  Node* slow = head;
+  Node* fast = head;
+  while (fast->next != NULL && fast->next->next != NULL) {
+    slow = slow->next;
+    fast = fast->next->next;
+  }
+  return slow;
+}
+
+void testFindMiddleNode() {
+  Node* head = NULL;
+  InsertNode(&head, 5);
+  InsertNode(&head, 4);
+  InsertNode(&head, 3);
+  InsertNode(&head, 2);
+  InsertNode(&head, 1);
+  PrintLinkList(head);
+  Node* middle = findMiddleNode(head);
+  printf("middel node data %d", middle->data);
+}
+
+void testReverse() {
+  Node* head = NULL;
+  InsertNode(&head, 1);
+  InsertNode(&head, 2);
+  InsertNode(&head, 3);
+  PrintLinkList(head);
+  reverse(&head);
+  PrintLinkList(head);
+}
+
+void testCircle() {
+  Node* circle_list = NULL;
+  MakeCircleLinkList(&circle_list);
+  printf("circle %d\n", circle(circle_list));
+  PrintLinkList(circle_list);
+}
+
 int main(int argc, char** argv) {
-  /*
-     Node* head = NULL;
-     InsertNode(&head, 1);
-     InsertNode(&head, 2);
-     InsertNode(&head, 3);
-     PrintLinkList(head);
-     reverse(&head);
-     PrintLinkList(head);
-     printf("circle %d\n", circle(head));
-     Node* circle_list = NULL;
-     MakeCircleLinkList(&circle_list);
-     printf("circle %d\n", circle(circle_list));
-     PrintLinkList(circle_list);
-     */
   //testMergeSortedList();
-  testDeleteLastKth();
+  //testDeleteLastKth();
+  //testCircle();
+  //testReverse();
+  testFindMiddleNode();
 }
