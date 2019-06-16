@@ -1,0 +1,337 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+BIN	Makefile	/^BIN = nty_server_test$/;"	m
+BIT	nty_coroutine.h	74;"	d
+CANCEL_FD_WAIT_UINT64	nty_coroutine.h	77;"	d
+CC	Makefile	/^CC = gcc$/;"	m
+CLEARBIT	nty_coroutine.h	75;"	d
+FD_EVENT	nty_schedule.c	51;"	d	file:
+FD_KEY	nty_schedule.c	50;"	d	file:
+FD_ONLY	nty_schedule.c	52;"	d	file:
+FLAG	Makefile	/^FLAG = -lpthread$/;"	m
+LIST_EMPTY	nty_queue.h	326;"	d
+LIST_ENTRY	nty_queue.h	288;"	d
+LIST_FIRST	nty_queue.h	328;"	d
+LIST_FOREACH	nty_queue.h	330;"	d
+LIST_FOREACH_SAFE	nty_queue.h	335;"	d
+LIST_HEAD	nty_queue.h	280;"	d
+LIST_HEAD_INITIALIZER	nty_queue.h	285;"	d
+LIST_INIT	nty_queue.h	340;"	d
+LIST_INSERT_AFTER	nty_queue.h	344;"	d
+LIST_INSERT_BEFORE	nty_queue.h	353;"	d
+LIST_INSERT_HEAD	nty_queue.h	361;"	d
+LIST_NEXT	nty_queue.h	369;"	d
+LIST_REMOVE	nty_queue.h	371;"	d
+LIST_SWAP	nty_queue.h	382;"	d
+MAX_CLIENT_NUM	nty_server_test.c	6;"	d	file:
+NTY_COROUTINE_COMPUTE_BUSY	nty_coroutine.h	/^	NTY_COROUTINE_COMPUTE_BUSY,$/;"	e	enum:__anon2
+NTY_COROUTINE_COMPUTE_FREE	nty_coroutine.h	/^	NTY_COROUTINE_COMPUTE_FREE$/;"	e	enum:__anon2
+NTY_COROUTINE_EV_READ	nty_coroutine.h	/^	NTY_COROUTINE_EV_READ,$/;"	e	enum:__anon3
+NTY_COROUTINE_EV_WRITE	nty_coroutine.h	/^	NTY_COROUTINE_EV_WRITE$/;"	e	enum:__anon3
+NTY_COROUTINE_STATUS_BUSY	nty_coroutine.h	/^	NTY_COROUTINE_STATUS_BUSY,$/;"	e	enum:__anon1
+NTY_COROUTINE_STATUS_CANCELLED	nty_coroutine.h	/^	NTY_COROUTINE_STATUS_CANCELLED,$/;"	e	enum:__anon1
+NTY_COROUTINE_STATUS_DETACH	nty_coroutine.h	/^	NTY_COROUTINE_STATUS_DETACH,$/;"	e	enum:__anon1
+NTY_COROUTINE_STATUS_EXITED	nty_coroutine.h	/^	NTY_COROUTINE_STATUS_EXITED,$/;"	e	enum:__anon1
+NTY_COROUTINE_STATUS_EXPIRED	nty_coroutine.h	/^	NTY_COROUTINE_STATUS_EXPIRED,$/;"	e	enum:__anon1
+NTY_COROUTINE_STATUS_FDEOF	nty_coroutine.h	/^	NTY_COROUTINE_STATUS_FDEOF,$/;"	e	enum:__anon1
+NTY_COROUTINE_STATUS_NEW	nty_coroutine.h	/^	NTY_COROUTINE_STATUS_NEW,$/;"	e	enum:__anon1
+NTY_COROUTINE_STATUS_PENDING_RUNCOMPUTE	nty_coroutine.h	/^	NTY_COROUTINE_STATUS_PENDING_RUNCOMPUTE,$/;"	e	enum:__anon1
+NTY_COROUTINE_STATUS_READY	nty_coroutine.h	/^	NTY_COROUTINE_STATUS_READY,$/;"	e	enum:__anon1
+NTY_COROUTINE_STATUS_RUNCOMPUTE	nty_coroutine.h	/^	NTY_COROUTINE_STATUS_RUNCOMPUTE,$/;"	e	enum:__anon1
+NTY_COROUTINE_STATUS_SLEEPING	nty_coroutine.h	/^	NTY_COROUTINE_STATUS_SLEEPING,$/;"	e	enum:__anon1
+NTY_COROUTINE_STATUS_WAIT_IO_READ	nty_coroutine.h	/^	NTY_COROUTINE_STATUS_WAIT_IO_READ,$/;"	e	enum:__anon1
+NTY_COROUTINE_STATUS_WAIT_IO_WRITE	nty_coroutine.h	/^	NTY_COROUTINE_STATUS_WAIT_IO_WRITE,$/;"	e	enum:__anon1
+NTY_COROUTINE_STATUS_WAIT_MULTI	nty_coroutine.h	/^	NTY_COROUTINE_STATUS_WAIT_MULTI$/;"	e	enum:__anon1
+NTY_COROUTINE_STATUS_WAIT_READ	nty_coroutine.h	/^	NTY_COROUTINE_STATUS_WAIT_READ,$/;"	e	enum:__anon1
+NTY_COROUTINE_STATUS_WAIT_WRITE	nty_coroutine.h	/^	NTY_COROUTINE_STATUS_WAIT_WRITE,$/;"	e	enum:__anon1
+NTY_CO_MAX_EVENTS	nty_coroutine.h	71;"	d
+NTY_CO_MAX_STACKSIZE	nty_coroutine.h	72;"	d
+OBJS	Makefile	/^OBJS = *.o$/;"	m
+QMD_LIST_CHECK_HEAD	nty_queue.h	300;"	d
+QMD_LIST_CHECK_HEAD	nty_queue.h	319;"	d
+QMD_LIST_CHECK_NEXT	nty_queue.h	307;"	d
+QMD_LIST_CHECK_NEXT	nty_queue.h	320;"	d
+QMD_LIST_CHECK_PREV	nty_queue.h	314;"	d
+QMD_LIST_CHECK_PREV	nty_queue.h	321;"	d
+QMD_TAILQ_CHECK_HEAD	nty_queue.h	421;"	d
+QMD_TAILQ_CHECK_HEAD	nty_queue.h	445;"	d
+QMD_TAILQ_CHECK_NEXT	nty_queue.h	433;"	d
+QMD_TAILQ_CHECK_NEXT	nty_queue.h	447;"	d
+QMD_TAILQ_CHECK_PREV	nty_queue.h	440;"	d
+QMD_TAILQ_CHECK_PREV	nty_queue.h	448;"	d
+QMD_TAILQ_CHECK_TAIL	nty_queue.h	428;"	d
+QMD_TAILQ_CHECK_TAIL	nty_queue.h	446;"	d
+QMD_TRACE_ELEM	nty_queue.h	69;"	d
+QMD_TRACE_ELEM	nty_queue.h	77;"	d
+QMD_TRACE_HEAD	nty_queue.h	62;"	d
+QMD_TRACE_HEAD	nty_queue.h	78;"	d
+RB_AUGMENT	nty_tree.h	320;"	d
+RB_BLACK	nty_tree.h	290;"	d
+RB_COLOR	nty_tree.h	304;"	d
+RB_EMPTY	nty_tree.h	306;"	d
+RB_ENTRY	nty_tree.h	293;"	d
+RB_FIND	nty_tree.h	710;"	d
+RB_FOREACH	nty_tree.h	717;"	d
+RB_FOREACH_FROM	nty_tree.h	722;"	d
+RB_FOREACH_REVERSE	nty_tree.h	732;"	d
+RB_FOREACH_REVERSE_FROM	nty_tree.h	737;"	d
+RB_FOREACH_REVERSE_SAFE	nty_tree.h	742;"	d
+RB_FOREACH_SAFE	nty_tree.h	727;"	d
+RB_GENERATE	nty_tree.h	385;"	d
+RB_GENERATE_INTERNAL	nty_tree.h	389;"	d
+RB_GENERATE_STATIC	nty_tree.h	387;"	d
+RB_HEAD	nty_tree.h	277;"	d
+RB_INF	nty_tree.h	706;"	d
+RB_INIT	nty_tree.h	285;"	d
+RB_INITIALIZER	nty_tree.h	282;"	d
+RB_INSERT	nty_tree.h	708;"	d
+RB_LEFT	nty_tree.h	301;"	d
+RB_MAX	nty_tree.h	715;"	d
+RB_MIN	nty_tree.h	714;"	d
+RB_NEGINF	nty_tree.h	705;"	d
+RB_NEXT	nty_tree.h	712;"	d
+RB_NFIND	nty_tree.h	711;"	d
+RB_PARENT	nty_tree.h	303;"	d
+RB_PREV	nty_tree.h	713;"	d
+RB_PROTOTYPE	nty_tree.h	367;"	d
+RB_PROTOTYPE_INTERNAL	nty_tree.h	371;"	d
+RB_PROTOTYPE_STATIC	nty_tree.h	369;"	d
+RB_RED	nty_tree.h	291;"	d
+RB_REMOVE	nty_tree.h	709;"	d
+RB_RIGHT	nty_tree.h	302;"	d
+RB_ROOT	nty_tree.h	305;"	d
+RB_ROTATE_LEFT	nty_tree.h	325;"	d
+RB_ROTATE_RIGHT	nty_tree.h	346;"	d
+RB_SET	nty_tree.h	308;"	d
+RB_SET_BLACKRED	nty_tree.h	314;"	d
+SLIST_EMPTY	nty_queue.h	104;"	d
+SLIST_ENTRY	nty_queue.h	96;"	d
+SLIST_FIRST	nty_queue.h	106;"	d
+SLIST_FOREACH	nty_queue.h	108;"	d
+SLIST_FOREACH_PREVPTR	nty_queue.h	118;"	d
+SLIST_FOREACH_SAFE	nty_queue.h	113;"	d
+SLIST_HEAD	nty_queue.h	88;"	d
+SLIST_HEAD_INITIALIZER	nty_queue.h	93;"	d
+SLIST_INIT	nty_queue.h	123;"	d
+SLIST_INSERT_AFTER	nty_queue.h	127;"	d
+SLIST_INSERT_HEAD	nty_queue.h	132;"	d
+SLIST_NEXT	nty_queue.h	137;"	d
+SLIST_REMOVE	nty_queue.h	139;"	d
+SLIST_REMOVE_AFTER	nty_queue.h	152;"	d
+SLIST_REMOVE_HEAD	nty_queue.h	157;"	d
+SPLAY_ASSEMBLE	nty_tree.h	97;"	d
+SPLAY_EMPTY	nty_tree.h	70;"	d
+SPLAY_ENTRY	nty_tree.h	61;"	d
+SPLAY_FIND	nty_tree.h	261;"	d
+SPLAY_FOREACH	nty_tree.h	268;"	d
+SPLAY_GENERATE	nty_tree.h	145;"	d
+SPLAY_HEAD	nty_tree.h	49;"	d
+SPLAY_INF	nty_tree.h	257;"	d
+SPLAY_INIT	nty_tree.h	57;"	d
+SPLAY_INITIALIZER	nty_tree.h	54;"	d
+SPLAY_INSERT	nty_tree.h	259;"	d
+SPLAY_LEFT	nty_tree.h	67;"	d
+SPLAY_LINKLEFT	nty_tree.h	85;"	d
+SPLAY_LINKRIGHT	nty_tree.h	91;"	d
+SPLAY_MAX	nty_tree.h	265;"	d
+SPLAY_MIN	nty_tree.h	263;"	d
+SPLAY_NEGINF	nty_tree.h	256;"	d
+SPLAY_NEXT	nty_tree.h	262;"	d
+SPLAY_PROTOTYPE	nty_tree.h	106;"	d
+SPLAY_REMOVE	nty_tree.h	260;"	d
+SPLAY_RIGHT	nty_tree.h	68;"	d
+SPLAY_ROOT	nty_tree.h	69;"	d
+SPLAY_ROTATE_LEFT	nty_tree.h	79;"	d
+SPLAY_ROTATE_RIGHT	nty_tree.h	73;"	d
+STAILQ_CONCAT	nty_queue.h	183;"	d
+STAILQ_EMPTY	nty_queue.h	191;"	d
+STAILQ_ENTRY	nty_queue.h	175;"	d
+STAILQ_FIRST	nty_queue.h	193;"	d
+STAILQ_FOREACH	nty_queue.h	195;"	d
+STAILQ_FOREACH_SAFE	nty_queue.h	201;"	d
+STAILQ_HEAD	nty_queue.h	166;"	d
+STAILQ_HEAD_INITIALIZER	nty_queue.h	172;"	d
+STAILQ_INIT	nty_queue.h	206;"	d
+STAILQ_INSERT_AFTER	nty_queue.h	211;"	d
+STAILQ_INSERT_HEAD	nty_queue.h	217;"	d
+STAILQ_INSERT_TAIL	nty_queue.h	223;"	d
+STAILQ_LAST	nty_queue.h	229;"	d
+STAILQ_NEXT	nty_queue.h	235;"	d
+STAILQ_REMOVE	nty_queue.h	237;"	d
+STAILQ_REMOVE_AFTER	nty_queue.h	256;"	d
+STAILQ_REMOVE_HEAD	nty_queue.h	250;"	d
+STAILQ_SWAP	nty_queue.h	262;"	d
+TAILQ_CONCAT	nty_queue.h	451;"	d
+TAILQ_EMPTY	nty_queue.h	462;"	d
+TAILQ_ENTRY	nty_queue.h	408;"	d
+TAILQ_FIRST	nty_queue.h	464;"	d
+TAILQ_FOREACH	nty_queue.h	466;"	d
+TAILQ_FOREACH_REVERSE	nty_queue.h	476;"	d
+TAILQ_FOREACH_REVERSE_SAFE	nty_queue.h	481;"	d
+TAILQ_FOREACH_SAFE	nty_queue.h	471;"	d
+TAILQ_HEAD	nty_queue.h	398;"	d
+TAILQ_HEAD_INITIALIZER	nty_queue.h	405;"	d
+TAILQ_INIT	nty_queue.h	486;"	d
+TAILQ_INSERT_AFTER	nty_queue.h	492;"	d
+TAILQ_INSERT_BEFORE	nty_queue.h	507;"	d
+TAILQ_INSERT_HEAD	nty_queue.h	517;"	d
+TAILQ_INSERT_TAIL	nty_queue.h	530;"	d
+TAILQ_LAST	nty_queue.h	540;"	d
+TAILQ_NEXT	nty_queue.h	543;"	d
+TAILQ_PREV	nty_queue.h	545;"	d
+TAILQ_REMOVE	nty_queue.h	548;"	d
+TAILQ_SWAP	nty_queue.h	564;"	d
+TRACEBUF	nty_queue.h	59;"	d
+TRACEBUF	nty_queue.h	79;"	d
+TRASHIT	nty_queue.h	60;"	d
+TRASHIT	nty_queue.h	80;"	d
+__NTY_COROUTINE_H__	nty_coroutine.h	47;"	d
+__NTY_QUEUE_H__	nty_queue.h	46;"	d
+__NTY_TREE_H__	nty_tree.h	46;"	d
+_exec	nty_coroutine.c	/^static void _exec(void *lt) {$/;"	f	file:
+_nty_coroutine	nty_coroutine.h	/^typedef struct _nty_coroutine {$/;"	s
+_nty_coroutine_compute_sched	nty_coroutine.h	/^typedef struct _nty_coroutine_compute_sched {$/;"	s
+_nty_cpu_ctx	nty_coroutine.h	/^typedef struct _nty_cpu_ctx {$/;"	s
+_nty_schedule	nty_coroutine.h	/^typedef struct _nty_schedule {$/;"	s
+arg	nty_coroutine.h	/^	void *arg;$/;"	m	struct:_nty_coroutine
+birth	nty_coroutine.h	/^	uint64_t birth;$/;"	m	struct:_nty_coroutine
+birth	nty_coroutine.h	/^	uint64_t birth;$/;"	m	struct:_nty_schedule
+buf	nty_coroutine.h	/^		void *buf;$/;"	m	struct:_nty_coroutine::__anon4
+busy	nty_coroutine.h	/^	nty_coroutine_link busy;$/;"	m	struct:_nty_schedule
+busy_next	nty_coroutine.h	/^	LIST_ENTRY(_nty_coroutine) busy_next;$/;"	m	struct:_nty_coroutine
+co_exit_ptr	nty_coroutine.h	/^	void **co_exit_ptr;$/;"	m	struct:_nty_coroutine
+co_join	nty_coroutine.h	/^	struct _nty_coroutine *co_join;$/;"	m	struct:_nty_coroutine	typeref:struct:_nty_coroutine::_nty_coroutine
+co_mutex	nty_coroutine.h	/^	pthread_mutex_t co_mutex;$/;"	m	struct:_nty_coroutine_compute_sched
+compute_next	nty_coroutine.h	/^	LIST_ENTRY(_nty_coroutine_compute_sched) compute_next;$/;"	m	struct:_nty_coroutine_compute_sched
+compute_next	nty_coroutine.h	/^	TAILQ_ENTRY(_nty_coroutine) compute_next;$/;"	m	struct:_nty_coroutine
+compute_sched	nty_coroutine.h	/^	struct _nty_coroutine_compute_sched *compute_sched;$/;"	m	struct:_nty_coroutine	typeref:struct:_nty_coroutine::_nty_coroutine_compute_sched
+compute_status	nty_coroutine.h	/^	nty_coroutine_compute_status compute_status;$/;"	m	struct:_nty_coroutine_compute_sched
+cond_next	nty_coroutine.h	/^	TAILQ_ENTRY(_nty_coroutine) cond_next;$/;"	m	struct:_nty_coroutine
+coroutines	nty_coroutine.h	/^	nty_coroutine_queue coroutines;$/;"	m	struct:_nty_coroutine_compute_sched
+ctx	nty_coroutine.h	/^	nty_cpu_ctx ctx;$/;"	m	struct:_nty_coroutine
+ctx	nty_coroutine.h	/^	nty_cpu_ctx ctx;$/;"	m	struct:_nty_coroutine_compute_sched
+ctx	nty_coroutine.h	/^	nty_cpu_ctx ctx;$/;"	m	struct:_nty_schedule
+curr_coroutine	nty_coroutine.h	/^	nty_coroutine *curr_coroutine;$/;"	m	struct:_nty_coroutine_compute_sched
+curr_thread	nty_coroutine.h	/^	struct _nty_coroutine *curr_thread;$/;"	m	struct:_nty_schedule	typeref:struct:_nty_schedule::_nty_coroutine
+data	nty_coroutine.h	/^	void *data;$/;"	m	struct:_nty_coroutine
+default_timeout	nty_coroutine.h	/^	uint64_t default_timeout;$/;"	m	struct:_nty_schedule
+defer	nty_coroutine.h	/^	nty_coroutine_queue defer;$/;"	m	struct:_nty_schedule
+defer_mutex	nty_coroutine.h	/^	pthread_mutex_t defer_mutex;$/;"	m	struct:_nty_schedule
+defer_next	nty_coroutine.h	/^	TAILQ_ENTRY(_nty_coroutine) defer_next;$/;"	m	struct:_nty_coroutine
+ebp	nty_coroutine.h	/^	void *ebp;$/;"	m	struct:_nty_coroutine
+ebp	nty_coroutine.h	/^	void *ebp;$/;"	m	struct:_nty_cpu_ctx
+ebx	nty_coroutine.h	/^	void *ebx;$/;"	m	struct:_nty_cpu_ctx
+edi	nty_coroutine.h	/^	void *edi;$/;"	m	struct:_nty_cpu_ctx
+eip	nty_coroutine.h	/^	void *eip;$/;"	m	struct:_nty_cpu_ctx
+err	nty_coroutine.h	/^		int err;$/;"	m	struct:_nty_coroutine::__anon4
+esi	nty_coroutine.h	/^	void *esi;$/;"	m	struct:_nty_cpu_ctx
+esp	nty_coroutine.h	/^	void *esp;$/;"	m	struct:_nty_cpu_ctx
+eventfd	nty_coroutine.h	/^	int eventfd;$/;"	m	struct:_nty_schedule
+eventlist	nty_coroutine.h	/^	struct epoll_event eventlist[NTY_CO_MAX_EVENTS];$/;"	m	struct:_nty_schedule	typeref:struct:_nty_schedule::epoll_event
+events	nty_coroutine.h	/^	unsigned short events;  \/\/POLL_EVENT$/;"	m	struct:_nty_coroutine
+fd	nty_coroutine.h	/^		int fd;$/;"	m	struct:_nty_coroutine::__anon4
+fd	nty_coroutine.h	/^	int fd;$/;"	m	struct:_nty_coroutine
+fd_wait	nty_coroutine.h	/^	int64_t fd_wait;$/;"	m	struct:_nty_coroutine
+func	nty_coroutine.h	/^	proc_coroutine func;$/;"	m	struct:_nty_coroutine
+funcname	nty_coroutine.h	/^	char funcname[64];$/;"	m	struct:_nty_coroutine
+global_sched_key	nty_coroutine.c	/^pthread_key_t global_sched_key;$/;"	v
+id	nty_coroutine.h	/^	uint64_t id;$/;"	m	struct:_nty_coroutine
+io	nty_coroutine.h	/^	} io;$/;"	m	struct:_nty_coroutine	typeref:struct:_nty_coroutine::__anon4
+io_next	nty_coroutine.h	/^	TAILQ_ENTRY(_nty_coroutine) io_next;$/;"	m	struct:_nty_coroutine
+last_stack_size	nty_coroutine.h	/^	size_t last_stack_size;$/;"	m	struct:_nty_coroutine
+lastfile	nty_queue.h	/^	char * lastfile;$/;"	m	struct:qm_trace
+lastline	nty_queue.h	/^	int lastline;$/;"	m	struct:qm_trace
+main	nty_server_test.c	/^int main(int argc, char *argv[]) {$/;"	f
+nbytes	nty_coroutine.h	/^		size_t nbytes;$/;"	m	struct:_nty_coroutine::__anon4
+nevents	nty_coroutine.h	/^	int nevents;$/;"	m	struct:_nty_schedule
+nfds	nty_coroutine.h	/^	nfds_t nfds;$/;"	m	struct:_nty_coroutine
+nty_accept	nty_socket.c	/^int nty_accept(int fd, struct sockaddr *addr, socklen_t *len) {$/;"	f
+nty_close	nty_socket.c	/^int nty_close(int fd) {$/;"	f
+nty_coroutine	nty_coroutine.h	/^} nty_coroutine;$/;"	t	typeref:struct:_nty_coroutine
+nty_coroutine_compute_sched	nty_coroutine.h	/^} nty_coroutine_compute_sched;$/;"	t	typeref:struct:_nty_coroutine_compute_sched
+nty_coroutine_compute_status	nty_coroutine.h	/^} nty_coroutine_compute_status;$/;"	t	typeref:enum:__anon2
+nty_coroutine_create	nty_coroutine.c	/^int nty_coroutine_create(nty_coroutine **new_co, proc_coroutine func, void *arg) {$/;"	f
+nty_coroutine_detach	nty_coroutine.c	/^void nty_coroutine_detach(void) {$/;"	f
+nty_coroutine_diff_usecs	nty_coroutine.h	/^static inline uint64_t nty_coroutine_diff_usecs(uint64_t t1, uint64_t t2) {$/;"	f
+nty_coroutine_event	nty_coroutine.h	/^} nty_coroutine_event;$/;"	t	typeref:enum:__anon3
+nty_coroutine_free	nty_coroutine.c	/^void nty_coroutine_free(nty_coroutine *co) {$/;"	f
+nty_coroutine_get_sched	nty_coroutine.h	/^static inline nty_schedule *nty_coroutine_get_sched(void) {$/;"	f
+nty_coroutine_init	nty_coroutine.c	/^static void nty_coroutine_init(nty_coroutine *co) {$/;"	f	file:
+nty_coroutine_link	nty_coroutine.h	/^typedef struct _nty_coroutine_link nty_coroutine_link;$/;"	t	typeref:struct:_nty_coroutine_link
+nty_coroutine_madvise	nty_coroutine.c	/^static inline void nty_coroutine_madvise(nty_coroutine *co) {$/;"	f	file:
+nty_coroutine_queue	nty_coroutine.h	/^typedef struct _nty_coroutine_queue nty_coroutine_queue;$/;"	t	typeref:struct:_nty_coroutine_queue
+nty_coroutine_rbtree_sleep	nty_coroutine.h	/^typedef struct _nty_coroutine_rbtree_sleep nty_coroutine_rbtree_sleep;$/;"	t	typeref:struct:_nty_coroutine_rbtree_sleep
+nty_coroutine_rbtree_wait	nty_coroutine.h	/^typedef struct _nty_coroutine_rbtree_wait nty_coroutine_rbtree_wait;$/;"	t	typeref:struct:_nty_coroutine_rbtree_wait
+nty_coroutine_renice	nty_coroutine.c	/^void nty_coroutine_renice(nty_coroutine *co) {$/;"	f
+nty_coroutine_resume	nty_coroutine.c	/^int nty_coroutine_resume(nty_coroutine *co) {$/;"	f
+nty_coroutine_sched_key_creator	nty_coroutine.c	/^static void nty_coroutine_sched_key_creator(void) {$/;"	f	file:
+nty_coroutine_sched_key_destructor	nty_coroutine.c	/^static void nty_coroutine_sched_key_destructor(void *data) {$/;"	f	file:
+nty_coroutine_sleep	nty_coroutine.c	/^void nty_coroutine_sleep(uint64_t msecs) {$/;"	f
+nty_coroutine_sleep_cmp	nty_schedule.c	/^static inline int nty_coroutine_sleep_cmp(nty_coroutine *co1, nty_coroutine *co2) {$/;"	f	file:
+nty_coroutine_status	nty_coroutine.h	/^} nty_coroutine_status;$/;"	t	typeref:enum:__anon1
+nty_coroutine_usec_now	nty_coroutine.h	/^static inline uint64_t nty_coroutine_usec_now(void) {$/;"	f
+nty_coroutine_wait_cmp	nty_schedule.c	/^static inline int nty_coroutine_wait_cmp(nty_coroutine *co1, nty_coroutine *co2) {$/;"	f	file:
+nty_coroutine_yield	nty_coroutine.c	/^void nty_coroutine_yield(nty_coroutine *co) {$/;"	f
+nty_cpu_ctx	nty_coroutine.h	/^} nty_cpu_ctx;$/;"	t	typeref:struct:_nty_cpu_ctx
+nty_epoller_create	nty_epoll.c	/^int nty_epoller_create(void) {$/;"	f
+nty_epoller_ev_register_trigger	nty_epoll.c	/^int nty_epoller_ev_register_trigger(void) {$/;"	f
+nty_epoller_wait	nty_epoll.c	/^int nty_epoller_wait(struct timespec t) {$/;"	f
+nty_epollevent_2poll	nty_socket.c	/^static short nty_epollevent_2poll( uint32_t events )$/;"	f	file:
+nty_poll_inner	nty_socket.c	/^static int nty_poll_inner(struct pollfd *fds, nfds_t nfds, int timeout) {$/;"	f	file:
+nty_pollevent_2epoll	nty_socket.c	/^static uint32_t nty_pollevent_2epoll( short events )$/;"	f	file:
+nty_recv	nty_socket.c	/^int nty_recv(int fd, void *buf, int length) {$/;"	f
+nty_schedule	nty_coroutine.h	/^} nty_schedule;$/;"	t	typeref:struct:_nty_schedule
+nty_schedule_cancel_wait	nty_schedule.c	/^void nty_schedule_cancel_wait(nty_coroutine *co) {$/;"	f
+nty_schedule_create	nty_schedule.c	/^int nty_schedule_create(int stack_size) {$/;"	f
+nty_schedule_desched_sleepdown	nty_schedule.c	/^void nty_schedule_desched_sleepdown(nty_coroutine *co) {$/;"	f
+nty_schedule_desched_wait	nty_schedule.c	/^nty_coroutine* nty_schedule_desched_wait(int fd) {$/;"	f
+nty_schedule_epoll	nty_schedule.c	/^static int nty_schedule_epoll(nty_schedule *sched) {$/;"	f	file:
+nty_schedule_expired	nty_schedule.c	/^static nty_coroutine *nty_schedule_expired(nty_schedule *sched) {$/;"	f	file:
+nty_schedule_free	nty_schedule.c	/^void nty_schedule_free(nty_schedule *sched) {$/;"	f
+nty_schedule_isdone	nty_schedule.c	/^static inline int nty_schedule_isdone(nty_schedule *sched) {$/;"	f	file:
+nty_schedule_min_timeout	nty_schedule.c	/^static uint64_t nty_schedule_min_timeout(nty_schedule *sched) {$/;"	f	file:
+nty_schedule_run	nty_schedule.c	/^void nty_schedule_run(void) {$/;"	f
+nty_schedule_sched_sleepdown	nty_schedule.c	/^void nty_schedule_sched_sleepdown(nty_coroutine *co, uint64_t msecs) {$/;"	f
+nty_schedule_sched_wait	nty_schedule.c	/^void nty_schedule_sched_wait(nty_coroutine *co, int fd, unsigned short events, uint64_t timeout) {$/;"	f
+nty_schedule_search_wait	nty_schedule.c	/^nty_coroutine *nty_schedule_search_wait(int fd) {$/;"	f
+nty_send	nty_socket.c	/^int nty_send(int fd, const void *buf, int length) {$/;"	f
+nty_socket	nty_socket.c	/^int nty_socket(int domain, int type, int protocol) {$/;"	f
+num_new_events	nty_coroutine.h	/^	int num_new_events;$/;"	m	struct:_nty_schedule
+ops	nty_coroutine.h	/^	uint32_t ops;$/;"	m	struct:_nty_coroutine
+page_size	nty_coroutine.h	/^	int page_size;$/;"	m	struct:_nty_schedule
+pfds	nty_coroutine.h	/^	struct pollfd *pfds;$/;"	m	struct:_nty_coroutine	typeref:struct:_nty_coroutine::pollfd
+poller_fd	nty_coroutine.h	/^	int poller_fd;$/;"	m	struct:_nty_schedule
+prevfile	nty_queue.h	/^	char * prevfile;$/;"	m	struct:qm_trace
+prevline	nty_queue.h	/^	int prevline;$/;"	m	struct:qm_trace
+proc_coroutine	nty_coroutine.h	/^typedef void (*proc_coroutine)(void *);$/;"	t
+qm_trace	nty_queue.h	/^struct qm_trace {$/;"	s
+r1	nty_coroutine.h	/^	void *r1;$/;"	m	struct:_nty_cpu_ctx
+r2	nty_coroutine.h	/^	void *r2;$/;"	m	struct:_nty_cpu_ctx
+r3	nty_coroutine.h	/^	void *r3;$/;"	m	struct:_nty_cpu_ctx
+r4	nty_coroutine.h	/^	void *r4;$/;"	m	struct:_nty_cpu_ctx
+r5	nty_coroutine.h	/^	void *r5;$/;"	m	struct:_nty_cpu_ctx
+ready	nty_coroutine.h	/^	nty_coroutine_queue ready;$/;"	m	struct:_nty_schedule
+ready_fds	nty_coroutine.h	/^	int ready_fds;$/;"	m	struct:_nty_coroutine
+ready_next	nty_coroutine.h	/^	TAILQ_ENTRY(_nty_coroutine) ready_next;$/;"	m	struct:_nty_coroutine
+ret	nty_coroutine.h	/^		int ret;$/;"	m	struct:_nty_coroutine::__anon4
+run_cond	nty_coroutine.h	/^	pthread_cond_t run_cond;$/;"	m	struct:_nty_coroutine_compute_sched
+run_mutex	nty_coroutine.h	/^	pthread_mutex_t run_mutex;$/;"	m	struct:_nty_coroutine_compute_sched
+sched	nty_coroutine.h	/^	nty_schedule *sched;$/;"	m	struct:_nty_coroutine
+sched_key_once	nty_coroutine.c	/^static pthread_once_t sched_key_once = PTHREAD_ONCE_INIT;$/;"	v	file:
+server	nty_server_test.c	/^void server(void *arg) {$/;"	f
+server_reader	nty_server_test.c	/^void server_reader(void *arg) {$/;"	f
+sleep_node	nty_coroutine.h	/^	RB_ENTRY(_nty_coroutine) sleep_node;$/;"	m	struct:_nty_coroutine
+sleep_usecs	nty_coroutine.h	/^	uint64_t sleep_usecs;$/;"	m	struct:_nty_coroutine
+sleeping	nty_coroutine.h	/^	nty_coroutine_rbtree_sleep sleeping;$/;"	m	struct:_nty_schedule
+spawned_coroutines	nty_coroutine.h	/^	int spawned_coroutines;$/;"	m	struct:_nty_schedule
+stack	nty_coroutine.h	/^	void *stack;$/;"	m	struct:_nty_coroutine
+stack	nty_coroutine.h	/^	void *stack;$/;"	m	struct:_nty_schedule
+stack_size	nty_coroutine.h	/^	size_t stack_size;$/;"	m	struct:_nty_coroutine
+stack_size	nty_coroutine.h	/^	size_t stack_size;$/;"	m	struct:_nty_schedule
+status	nty_coroutine.h	/^	nty_coroutine_status status;$/;"	m	struct:_nty_coroutine
+wait_node	nty_coroutine.h	/^	RB_ENTRY(_nty_coroutine) wait_node;$/;"	m	struct:_nty_coroutine
+waiting	nty_coroutine.h	/^	nty_coroutine_rbtree_wait waiting;$/;"	m	struct:_nty_schedule
